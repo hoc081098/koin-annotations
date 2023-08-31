@@ -56,6 +56,8 @@ fun generateClassModule(classFile: OutputStream, module: KoinMetaData.Module) {
 
     if (module.definitions.isNotEmpty()) {
         if (module.definitions.any {
+                // if any definition is a class function, we need to instantiate the module instance
+                // to able to call the function on this instance.
                 it is KoinMetaData.Definition.FunctionDefinition &&
                     it.isClassFunction
             }) {
